@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class BookShelfChanger extends Component {
     state = {
@@ -78,6 +79,15 @@ class BookShelfChanger extends Component {
             </div>
         );
     }
+}
+
+BookShelfChanger.defaultProps = {
+    shelf: ''
+}
+
+BookShelfChanger.propTypes = {
+    shelf: PropTypes.string,
+    moveBook: PropTypes.func.isRequired
 }
 
 export default BookShelfChanger;
