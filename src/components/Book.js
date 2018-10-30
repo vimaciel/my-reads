@@ -7,6 +7,11 @@ class Book extends Component {
         movingBook: false
     }
 
+    /**
+     * @description Function responsible for return html block with book's title and year. 
+     * Sometimes the book doesn't have the published year, then this case is considered in this function too.
+     * @returns {HTMLElement} html element with book's tile and published date (only year).
+     */
     createBookTitle = () => {
         const year = this.props.book.publishedDate !== undefined ? this.props.book.publishedDate.split('-')[0] : null;
         const title = this.props.book.title;
@@ -16,6 +21,13 @@ class Book extends Component {
         </div>
     }
 
+    /**
+     * @description Function responsible for move book to other shelf. 
+     * This function controls the visibilty of loading indicator. 
+     * To avoid that loading indicator still showing after the end of the process,
+     * it was created a setTimeout to hide loading indicator after 2 seconds.
+     * @param {string} shelf - shelf's id as string
+     */
     moveBook = (shelf) => {
         this.setState({ movingBook: true })
         this.props.moveBook(this.props.book, shelf);

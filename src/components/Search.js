@@ -4,11 +4,23 @@ import Book from './Book';
 import PropTypes from 'prop-types';
 
 class Search extends Component {
+
+    /**
+     * @description Function responsible for change text search whenever the user hint a new word
+     * @param {Event} e - The Object Event
+     */
     searchTextChanged = (e) => {
         this.props.searchTextChanged(e.target.value);
     }
 
-    moveBook = (book, shelf) => this.props.moveBook(book, shelf);
+    /**
+     * @description Function responsible for move book to other shelf
+     * @param {Object} book - book selected as object
+     * @param {string} shelf - shelf's id as string
+     */
+    moveBook = (book, shelf) => {
+        this.props.moveBook(book, shelf);
+    }
 
     render() {
         return (
@@ -33,7 +45,8 @@ class Search extends Component {
 
 Search.propTypes = {
     books: PropTypes.array.isRequired,
-    moveBook: PropTypes.func.isRequired
+    moveBook: PropTypes.func.isRequired,
+    searchTextChanged: PropTypes.func.isRequired
 }
 
 export default Search;

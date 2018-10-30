@@ -26,16 +26,26 @@ class App extends React.Component {
     searchText: ''
   }
 
+  /**
+   * @description Function responsible for move book to other shelf.
+   * This function calls the api and then the shelves are updated
+   * @param {Object} book - book selected as object
+   * @param {string} shelf - shelf's id as string
+   */
   moveBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       this.getAllBooks();
     });
   }
 
+  
   componentDidMount() {
     this.getAllBooks();
   }
-
+  
+  /**
+   * @description Get all books from api and then update the state with those books
+   */
   getAllBooks = () => {
     BooksAPI.getAll().then(response => {
       this.setState({
@@ -44,6 +54,10 @@ class App extends React.Component {
     })
   }
 
+  /**
+   * @description When user hint a new word on search books this function is fired. 
+   * The api returns books that match with the user's query and then set the state with these result.
+   */
   searchTextChanged = (searchText) => {
     this.setState({ searchText: searchText });
 

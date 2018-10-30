@@ -5,7 +5,14 @@ import PropTypes from 'prop-types';
 
 class Home extends Component {
 
-    moveBook = (book, shelf) => this.props.moveBook(book, shelf);
+    /**
+     * @description Function responsible for move book to other shelf
+     * @param {Object} book - book selected as object
+     * @param {string} shelf - shelf's id as string
+     */
+    moveBook = (book, shelf) => {
+        this.props.moveBook(book, shelf);
+    }
 
     render() {
         return (
@@ -28,7 +35,8 @@ class Home extends Component {
 
 Home.propTypes = {
     shelves: PropTypes.array.isRequired,
-    moveBook: PropTypes.func.isRequired
+    moveBook: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired
 }
 
 export default Home;

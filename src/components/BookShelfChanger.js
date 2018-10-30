@@ -27,36 +27,37 @@ class BookShelfChanger extends Component {
             }
         ]
     }
-
+   
+    /**
+     * @description Select item if exists an item selected passed by props.
+     */
     componentDidMount() {
-        const items = this.state.items.map(item => {
-            item.selected = item.id === this.props.shelf;
-            return item;
-        });
-
+        const items = this.selectItem(this.props.shelf);
         this.setState({
             items
         });
     }
 
+    /**
+     * @description Function responsible for hide/show the list of items.
+     */
     buttonOnClick = () => {
         this.setState({
             showList: !this.state.showList
         });
     }
 
+    /**
+     * @description Function responsible for move book to other shelf.
+     * If the item has a class it means this item is selected and the process stops in this scenario.
+     * @param {Event} e - The Event Object
+     */
     itemOnClick = (e) => {
         if (e.target.className !== '') {
             return;
         }
 
-        const itemSelected = this.state.items.find(item => item.id === e.target.dataset.key);
-        itemSelected.selected = false
-
-        const items = this.state.items.map(item => {
-            item.selected = item.id === e.target.dataset.key;
-            return item;
-        });
+        const items = this.selectItem(e.target.dataset.key)
 
         this.setState({
             items,
@@ -64,6 +65,18 @@ class BookShelfChanger extends Component {
         });
 
         this.props.moveBook(e.target.dataset.key);
+    }
+
+    /**
+     * @description Whenever witch one item is selected, this function changes the selected item to true 
+     * @param {string} id - Id of the selected item
+     * @returns {Array} Items updated
+     */
+    selectItem = (id) => {
+        return this.state.items.map(item => {
+            item.selected = item.id === id;
+            return item;
+        });
     }
 
     render() {

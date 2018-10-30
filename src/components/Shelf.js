@@ -3,6 +3,12 @@ import Book from './Book';
 import PropTypes from "prop-types";
 
 class Shelf extends Component {
+
+    /**
+     * @description Function responsible for move book to other shelf
+     * @param {Object} book - book selected as object
+     * @param {string} shelf - shelf's id as string
+     */
     moveBook = (book, shelf) => {
         this.props.moveBook(book, shelf);
     }
