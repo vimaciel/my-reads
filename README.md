@@ -15,7 +15,7 @@ To keep the My Read project organized was created folders inside the src, as you
     ├── components # Now all components' app lives here
     ├── styles # The css files used on the app lives here
     ├── test # test files must be here
-    ├── ... # The same structure than reactnd-project-myreads-starter
+    ├── ... # The same structure of reactnd-project-myreads-starter
 ```
 
 ### How to use
