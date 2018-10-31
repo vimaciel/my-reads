@@ -1,4 +1,5 @@
 # My Reads
+[![Build Status](https://travis-ci.org/vimaciel/my-reads.svg?branch=master)](https://travis-ci.org/vimaciel/my-reads)
 
 by [Vinicius Furusho Maciel](www.linkedin.com/in/vimaciel)
 
