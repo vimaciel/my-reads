@@ -1,7 +1,7 @@
 # My Reads
 [![Build Status](https://travis-ci.org/vimaciel/my-reads.svg?branch=master)](https://travis-ci.org/vimaciel/my-reads)
 
-by [Vinicius Furusho Maciel](www.linkedin.com/in/vimaciel)
+by [Vinicius Furusho Maciel](https://www.linkedin.com/in/vimaciel)
 
 If you use My Read you can organize your books on shelves. These shelves are divided into three main categories: Currently Reading, Want to Read and Read. You are free to move your books into these shelves' categories listed previously. Also, you can do a research to find more books if you want. 
 
@@ -36,6 +36,8 @@ $ npm start
 ```
 
 The resulting will be......
+
+![](demo.gif)
 
 ### License
 MIT
