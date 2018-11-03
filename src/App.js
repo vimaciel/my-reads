@@ -33,32 +33,39 @@ class App extends React.Component {
    * @param {string} shelf - shelf's id as string
    */
   moveBook = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(() => {
-      this.getAllBooks();
+    BooksAPI.update(book, shelf);
+
+    book.shelf = shelf;
+
+    const searchBooks = this.state.searchBooks.map(b => {
+      if (b.id === book.id) {
+        b = book
+      }
+
+      return b;
+    });
+
+    this.setState(state => {
+      return {
+        books: state.books.filter(b => b.id !== book.id).concat([book]),
+        searchBooks
+      }
     });
   }
 
-  
-  componentDidMount() {
-    this.getAllBooks();
-  }
-  
   /**
    * @description Get all books from api and then update the state with those books
    */
-  getAllBooks = () => {
-    BooksAPI.getAll().then(response => {
-      this.setState({
-        books: response
-      })
-    })
+  async componentDidMount() {
+    const books = await BooksAPI.getAll();
+    this.setState({ books });
   }
 
   /**
    * @description When user hint a new word on search books this function is fired. 
    * The api returns books that match with the user's query and then set the state with these result.
    */
-  searchTextChanged = (searchText) => {
+  searchTextChanged = async (searchText) => {
     this.setState({ searchText: searchText });
 
     let searchBooks = [];
@@ -68,10 +75,17 @@ class App extends React.Component {
       return;
     }
 
-    BooksAPI.search(searchText).then(response => {
-      searchBooks = response.error !== 'empty query' ? response : [];
-      this.setState({ searchBooks });
-    })
+    const response = await BooksAPI.search(searchText);
+    searchBooks = response.error !== 'empty query' ? response : [];
+
+    searchBooks = searchBooks.map(b => {
+      const book = this.state.books.find(book => book.id === b.id);
+      book !== undefined ? b.shelf = book.shelf : b.shelf = 'none';
+      return b;
+    });
+
+    this.setState({ searchBooks });
+
   }
 
   render() {

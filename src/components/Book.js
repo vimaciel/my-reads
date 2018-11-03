@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import BookShelfChanger from './BookShelfChanger';
 import PropTypes from 'prop-types';
+import BookWithoutCoverImage from '../images/book_without_cover.png';
 
-class Book extends Component {
+class Book extends PureComponent {
     state = {
         movingBook: false
     }
@@ -38,7 +39,8 @@ class Book extends Component {
     }
 
     render() {
-        const authors = this.props.book.authors !== undefined ? (
+        const book = this.props.book;
+        const authors = book.authors !== undefined ? (
             <ol>
                 {this.props.book.authors.map(author => (
                     <li key={this.props.book.authors.indexOf(author)}>{author}</li>
@@ -46,12 +48,19 @@ class Book extends Component {
             </ol>
         ) : false;
 
+        const bookThumbnail = book.imageLinks !== undefined ? book.imageLinks.thumbnail : BookWithoutCoverImage;
+
         return (
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})` }}></div>
+                    <div className="book-cover"
+                        style={{
+                            width: 128, height: 193, backgroundImage:
+                                `url(${bookThumbnail})`
+                        }}>
+                    </div>
                     <i style={{ display: this.state.movingBook ? 'block' : 'none' }} className="moving-book">moving the book...</i>
-                    <BookShelfChanger shelf={this.props.book.shelf} moveBook={this.moveBook} />
+                    <BookShelfChanger shelf={book.shelf} moveBook={this.moveBook} />
                 </div >
                 <div>
                     <div className="book-title">{this.createBookTitle()}</div>

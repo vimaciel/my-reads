@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 import PropTypes from 'prop-types';
+import { debounce } from "lodash";
 
 class Search extends Component {
 
+    state = {
+        searchText: this.props.searchText
+    }
+
     /**
      * @description Function responsible for change text search whenever the user hint a new word
-     * @param {Event} e - The Object Event
+     * @param {string} text - User's search text
      */
-    searchTextChanged = (e) => {
-        this.props.searchTextChanged(e.target.value);
-    }
+    searchTextChanged = debounce((text) => {
+        this.props.searchTextChanged(text);
+    }, 600);
 
     /**
      * @description Function responsible for move book to other shelf
@@ -28,7 +33,11 @@ class Search extends Component {
                 <div className="search-books-bar">
                     <Link className="close-search" to="/" />
                     <div className="search-books-input-wrapper">
-                        <input type="text" value={this.props.searchText} onChange={this.searchTextChanged} placeholder="Search by title or author" />
+                        <input type="text" value={this.state.searchText}
+                            onChange={(e) => {
+                                this.setState({ searchText: e.target.value });
+                                this.searchTextChanged(e.target.value);
+                            }} placeholder="Search by title or author" />
                     </div>
                 </div>
                 <div className="search-books-results">
