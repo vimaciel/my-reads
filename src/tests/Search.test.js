@@ -2,8 +2,10 @@ import React from 'react';
 import Search from '../components/Search'
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
+import * as sinon from 'sinon';
 
 describe('<Search />', () => {
+    let clock = sinon.useFakeTimers();
     const mockProps = {
         books: [{
             id: '1',
@@ -49,11 +51,16 @@ describe('<Search />', () => {
 
         const mockedEvent = {
             target: {
-                value: 'a'
+                value: 'React'
             }
         }
 
         wrapper.find('.search-books-input-wrapper input').simulate('change', mockedEvent);
+        
+        // https://stackoverflow.com/a/52226973
+        // https://sinonjs.org/releases/v6.2.0/fake-timers/
+        clock.tick(1000);
+
         expect(mockProps.searchTextChanged).toHaveBeenCalled();
     })
 
