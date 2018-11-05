@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import BookShelfChanger from './BookShelfChanger';
 import PropTypes from 'prop-types';
 import BookWithoutCoverImage from '../images/book_without_cover.png';
+import { Card, CardBody, CardTitle, CardImg, CardSubtitle } from 'reactstrap';
 
 class Book extends PureComponent {
     state = {
@@ -9,17 +10,13 @@ class Book extends PureComponent {
     }
 
     /**
-     * @description Function responsible for return html block with book's title and year. 
+     * @description Function responsible for return string with book's published year. 
      * Sometimes the book doesn't have the published year, then this case is considered in this function too.
-     * @returns {HTMLElement} html element with book's tile and published date (only year).
+     * @returns {string} string with book's tile and published date (only year).
      */
-    createBookTitle = () => {
+    createBookSubtitle = () => {
         const year = this.props.book.publishedDate !== undefined ? this.props.book.publishedDate.split('-')[0] : null;
-        const title = this.props.book.title;
-        return <div>
-            <span>{title}</span>
-            <span>{year !== null ? ` (${year})` : false}</span>
-        </div>
+        return year !== null ? ` (${year})` : false;
     }
 
     /**
@@ -51,24 +48,17 @@ class Book extends PureComponent {
         const bookThumbnail = book.imageLinks !== undefined ? book.imageLinks.thumbnail : BookWithoutCoverImage;
 
         return (
-            <div className="book">
-                <div className="book-top">
-                    <div className="book-cover"
-                        style={{
-                            width: 128, height: 193, backgroundImage:
-                                `url(${bookThumbnail})`
-                        }}>
-                    </div>
-                    <i style={{ display: this.state.movingBook ? 'block' : 'none' }} className="moving-book">moving the book...</i>
-                    <BookShelfChanger shelf={book.shelf} moveBook={this.moveBook} />
-                </div >
-                <div>
-                    <div className="book-title">{this.createBookTitle()}</div>
+            <Card className="book">
+                <CardImg top style={{ width: 128, height: 193 }} src={bookThumbnail} alt="Card image cap" />
+                <CardBody>
+                    <CardTitle>{book.title}</CardTitle>
+                    <CardSubtitle>{this.createBookSubtitle()}</CardSubtitle>
                     <div className="book-authors">
                         {authors}
                     </div>
-                </div>
-            </div>
+                </CardBody>
+                <BookShelfChanger moveBook={this.moveBook} shelf={book.shelf} />
+            </Card>
         )
     }
 }

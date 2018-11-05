@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class BookShelfChanger extends Component {
     state = {
-        showList: false,
         items: [
             {
                 id: 'currentlyReading',
@@ -25,9 +25,10 @@ class BookShelfChanger extends Component {
                 text: 'None',
                 selected: false
             }
-        ]
+        ],
+        dropdownOpen: false
     }
-   
+
     /**
      * @description Select item if exists an item selected passed by props.
      */
@@ -53,10 +54,6 @@ class BookShelfChanger extends Component {
      * @param {Event} e - The Event Object
      */
     itemOnClick = (e) => {
-        if (e.target.className !== '') {
-            return;
-        }
-
         const items = this.selectItem(e.target.dataset.key)
 
         this.setState({
@@ -79,17 +76,27 @@ class BookShelfChanger extends Component {
         });
     }
 
+    onToogleDropDown = () => {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        });
+    }
+
     render() {
         return (
-            <div>
-                <input type="button" className="book-shelf-changer" onClick={this.buttonOnClick} />
-                <ol className="book-shelf-changer-list" style={{ display: this.state.showList ? 'block' : 'none' }}>
-                    <li className="move-book-header">Move to...</li>
-                    {this.state.items.map(map => (
-                        <li key={map.id} data-key={map.id} onClick={this.itemOnClick} className={map.selected ? 'shelf-selected' : ''}>{map.text}</li>
+            <Dropdown isOpen={this.state.dropdownOpen} size="sm" className="book-shelf-changer"
+                toggle={this.onToogleDropDown}>
+                <DropdownToggle caret color="success">
+                    Move book
+                </DropdownToggle>
+                <DropdownMenu>
+                    {this.state.items.map(item => (
+                        <DropdownItem data-key={item.id} onClick={this.itemOnClick} key={item.id} disabled={item.selected} className={item.selected ? 'shelf-selected' : ''}>
+                            {item.text}
+                        </DropdownItem>
                     ))}
-                </ol>
-            </div>
+                </DropdownMenu>
+            </Dropdown>
         );
     }
 }

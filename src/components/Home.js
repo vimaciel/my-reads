@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Shelf from './Shelf';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Col, Row, Container } from 'reactstrap';
 
 class Home extends Component {
 
@@ -20,11 +21,15 @@ class Home extends Component {
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
-                <div className="list-books-content">
-                    {this.props.shelves.map(shelf => (
-                        <Shelf key={shelf.id} title={shelf.title} moveBook={this.moveBook} books={this.props.books.filter(books => books.shelf === shelf.id)} />
-                    ))}
-                </div>
+                <Container>
+                    <Row>
+                        {this.props.shelves.map(shelf => (
+                            <Col key={shelf.id} md="4" className="d-flex align-items-stretch">
+                                <Shelf key={shelf.id} title={shelf.title} moveBook={this.moveBook} books={this.props.books.filter(books => books.shelf === shelf.id)} />
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
                 <div className="open-search">
                     <Link to="/search">Add a book</Link>
                 </div>
