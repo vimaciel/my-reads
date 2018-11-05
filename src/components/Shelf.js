@@ -10,7 +10,7 @@ class Shelf extends Component {
      * @param {string} shelf - shelf's id as string
      */
     moveBook = (book, shelf) => {
-        this.props.moveBook(book, shelf);this.props.moveBook(book, shelf);
+        this.props.moveBook(book, shelf);
     }
 
     render() {
@@ -18,13 +18,11 @@ class Shelf extends Component {
             <div className="bookshelf">
                 <span className="bookshelf-title">{this.props.title}</span>
                 <div className="bookshelf-books">
-                    <ol className="books-grid">
+                    <div className="books-grid">
                         {this.props.books.map(book => (
-                            <li key={book.id}>
-                                <Book moveBook={this.moveBook} book={book} />
-                            </li>
+                            <Book key={book.id} moveBook={this.moveBook} book={book} />
                         ))}
-                    </ol>
+                    </div>
                 </div>
             </div>
         )

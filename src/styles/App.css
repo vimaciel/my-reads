@@ -115,8 +115,7 @@ body, .app {
 .books-grid {
   list-style-type: none;
   padding: 0;
-  margin-top: 25px;
-
+  margin: 25px 2px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -131,6 +130,7 @@ body, .app {
   -webkit-box-shadow: 12px 12px 19px -5px rgba(0,0,0,0.37);
   -moz-box-shadow: 12px 12px 19px -5px rgba(0,0,0,0.37);
   box-shadow: 12px 12px 19px -5px rgba(0,0,0,0.37);
+  margin: 10px;
 }
 .book-title,
 .book-authors {
