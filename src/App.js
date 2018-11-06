@@ -23,7 +23,9 @@ class App extends React.Component {
     ],
     books: [],
     searchBooks: [],
-    searchText: ''
+    searchText: '',
+    loadingBooks: true,
+    loadingSearchBooks: false
   }
 
   /**
@@ -58,7 +60,7 @@ class App extends React.Component {
    */
   async componentDidMount() {
     const books = await BooksAPI.getAll();
-    this.setState({ books });
+    this.setState({ books, loadingBooks: false });
   }
 
   /**
@@ -75,6 +77,8 @@ class App extends React.Component {
       return;
     }
 
+    this.setState({ loadingSearchBooks: true });
+
     const response = await BooksAPI.search(searchText);
     searchBooks = response.error !== 'empty query' ? response : [];
 
@@ -84,15 +88,14 @@ class App extends React.Component {
       return b;
     });
 
-    this.setState({ searchBooks });
-
+    this.setState({ searchBooks, loadingSearchBooks: false });
   }
 
   render() {
     return (
       <div className="app">
-        <Route exact path="/" render={() => <Home shelves={this.state.shelves} books={this.state.books} moveBook={this.moveBook} />} />
-        <Route exact path="/search" render={() => <Search searchText={this.state.searchText} searchTextChanged={this.searchTextChanged} books={this.state.searchBooks} moveBook={this.moveBook} />} />
+        <Route exact path="/" render={() => <Home loadingBooks={this.state.loadingBooks} shelves={this.state.shelves} books={this.state.books} moveBook={this.moveBook} />} />
+        <Route exact path="/search" render={() => <Search loadingSearchBooks={this.state.loadingSearchBooks} searchText={this.state.searchText} searchTextChanged={this.searchTextChanged} books={this.state.searchBooks} moveBook={this.moveBook} />} />
       </div>
     )
   }

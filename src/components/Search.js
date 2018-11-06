@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import Book from './Book';
 import PropTypes from 'prop-types';
 import { debounce } from "lodash";
+import LoaderIndicator from './LoaderIndicator';
 
 class Search extends Component {
 
     state = {
-        searchText: this.props.searchText
+        searchText: this.props.searchText,        
     }
 
     /**
@@ -15,6 +16,7 @@ class Search extends Component {
      * @param {string} text - User's search text
      */
     searchTextChanged = debounce((text) => {
+        this.setState({ loadingSearchBooks: true });
         this.props.searchTextChanged(text);
     }, 600);
 
@@ -38,6 +40,7 @@ class Search extends Component {
                                 this.setState({ searchText: e.target.value });
                                 this.searchTextChanged(e.target.value);
                             }} placeholder="Search by title or author" />
+                        <LoaderIndicator className="loader-search-indicator" show={this.props.loadingSearchBooks} />
                     </div>
                 </div>
                 <div className="search-books-results">

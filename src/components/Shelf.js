@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Book from './Book';
 import PropTypes from "prop-types";
+import LoaderIndicator from './LoaderIndicator';
 
 class Shelf extends Component {
-
     /**
      * @description Function responsible for move book to other shelf
      * @param {Object} book - book selected as object
@@ -24,14 +24,19 @@ class Shelf extends Component {
                 onDragOver={(e) => e.preventDefault()}
                 onDragEnter={(e) => e.preventDefault()}
                 onDrop={this.onDrop}>
-                <span className="bookshelf-title">{this.props.title}</span>
+                <div className="loader-indicator-shelf">
+                    <LoaderIndicator show={this.props.loadingBooks} />
+                </div>
+                <span className="bookshelf-title">
+                    {this.props.title}
+                </span>
                 <div className="bookshelf-books">
                     <div className="books-grid">
                         {this.props.books.map(book => (
                             <Book key={book.id} moveBook={this.moveBook} book={book} />
                         ))}
                     </div>
-                </div>
+                </div>                
             </div>
         )
     }
