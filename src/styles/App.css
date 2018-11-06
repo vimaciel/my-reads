@@ -41,6 +41,10 @@ body, .app {
   width: 100%;
 }
 
+.bookshelf-drag-enter {
+  border: 5px solid #00992b;
+}
+
 .bookshelf-title {
   font-family: 'Pacifico', cursive;
   font-size: 25px;
@@ -131,6 +135,10 @@ body, .app {
   -moz-box-shadow: 12px 12px 19px -5px rgba(0,0,0,0.37);
   box-shadow: 12px 12px 19px -5px rgba(0,0,0,0.37);
   margin: 10px;
+  text-align: left;
+}
+.book:hover{
+  cursor: move;
 }
 .book-title,
 .book-authors {

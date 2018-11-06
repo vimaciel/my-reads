@@ -35,6 +35,11 @@ class Book extends PureComponent {
         }, 2000);
     }
 
+    onDragStart = (ev) => {
+        const data = JSON.stringify(this.props.book);
+        ev.dataTransfer.setData('text/plain', data);
+    }
+
     render() {
         const book = this.props.book;
         const authors = book.authors !== undefined ? (
@@ -48,8 +53,8 @@ class Book extends PureComponent {
         const bookThumbnail = book.imageLinks !== undefined ? book.imageLinks.thumbnail : BookWithoutCoverImage;
 
         return (
-            <Card className="book">
-                <CardImg top style={{ width: 128, height: 193 }} src={bookThumbnail} alt="Card image cap" />
+            <Card className="book" draggable onDragStart={this.onDragStart}>
+                <CardImg draggable="false" top style={{ width: 128, height: 193 }} src={bookThumbnail} alt="Card image cap" />
                 <CardBody>
                     <CardTitle>{book.title}</CardTitle>
                     <CardSubtitle>{this.createBookSubtitle()}</CardSubtitle>

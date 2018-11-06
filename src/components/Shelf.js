@@ -13,9 +13,17 @@ class Shelf extends Component {
         this.props.moveBook(book, shelf);
     }
 
+    onDrop = (ev) => {
+        const book = JSON.parse(ev.dataTransfer.getData('text'));
+        this.props.moveBook(book, this.props.id);
+    }
+
     render() {
         return (
-            <div className="bookshelf">
+            <div id={this.props.id} className="bookshelf"
+                onDragOver={(e) => e.preventDefault()}
+                onDragEnter={(e) => e.preventDefault()}
+                onDrop={this.onDrop}>
                 <span className="bookshelf-title">{this.props.title}</span>
                 <div className="bookshelf-books">
                     <div className="books-grid">
@@ -30,6 +38,7 @@ class Shelf extends Component {
 }
 
 Shelf.propTypes = {
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     moveBook: PropTypes.func.isRequired
 }

@@ -25,7 +25,7 @@ class Home extends Component {
                     <Row>
                         {this.props.shelves.map(shelf => (
                             <Col key={shelf.id} md="4" className="d-flex align-items-stretch">
-                                <Shelf key={shelf.id} title={shelf.title} moveBook={this.moveBook} books={this.props.books.filter(books => books.shelf === shelf.id)} />
+                                <Shelf key={shelf.id} id={shelf.id} title={shelf.title} moveBook={this.moveBook} books={this.props.books.filter(books => books.shelf === shelf.id)} />
                             </Col>
                         ))}
                     </Row>
