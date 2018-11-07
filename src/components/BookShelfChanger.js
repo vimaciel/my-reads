@@ -89,9 +89,9 @@ class BookShelfChanger extends Component {
                 <DropdownToggle caret color="success">
                     Move book
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu style={{top: 0}}>
                     {this.state.items.map(item => (
-                        <DropdownItem data-key={item.id} onClick={this.itemOnClick} key={item.id} disabled={item.selected} className={item.selected ? 'shelf-selected' : ''}>
+                        <DropdownItem id={item.id} data-key={item.id} onClick={this.itemOnClick} key={item.id} disabled={item.selected} className={item.selected ? 'shelf-selected' : ''}>
                             {item.text}
                         </DropdownItem>
                     ))}

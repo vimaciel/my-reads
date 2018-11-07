@@ -34,6 +34,7 @@ describe('<Home />', () => {
                 title: 'Read',
             }
         ],
+        loadingBooks: false
     }
 
     const mockedEvent = {
@@ -52,7 +53,7 @@ describe('<Home />', () => {
             </MemoryRouter>
         );
 
-        wrapper.find('li[data-key="read"]').simulate('click', mockedEvent);
+        wrapper.find('#read').at(1).simulate('click', mockedEvent);
         expect(mockProps.moveBook).toHaveBeenCalled();
     })
 })

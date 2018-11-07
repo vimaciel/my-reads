@@ -20,7 +20,8 @@ describe('<Search />', () => {
         }],
         searchText: 'react',
         moveBook: jest.fn(),
-        searchTextChanged: jest.fn()
+        searchTextChanged: jest.fn(),
+        loadingSearchBooks: false
     }
 
     const mockedEvent = {
@@ -38,7 +39,7 @@ describe('<Search />', () => {
                 <Search {...mockProps} />
             </MemoryRouter>
         );
-        wrapper.find('li[data-key="read"]').simulate('click', mockedEvent);
+        wrapper.find('#read').at(1).simulate('click', mockedEvent);
         expect(mockProps.moveBook).toHaveBeenCalled();
     })
 
@@ -56,7 +57,7 @@ describe('<Search />', () => {
         }
 
         wrapper.find('.search-books-input-wrapper input').simulate('change', mockedEvent);
-        
+
         // https://stackoverflow.com/a/52226973
         // https://sinonjs.org/releases/v6.2.0/fake-timers/
         clock.tick(1000);
@@ -72,5 +73,27 @@ describe('<Search />', () => {
         );
 
         expect(wrapper.find('.search-books-input-wrapper input').props().value).toBe(mockProps.searchText);
+    })
+
+    it('Check if loading indicator shows when loadingBooks set to true', () => {
+        mockProps.loadingSearchBooks = true;
+        const wrapper = mount(
+            <MemoryRouter initialEntries={['/']}>
+                <Search {...mockProps} />
+            </MemoryRouter>
+        );
+
+        expect(wrapper.find('.loader-search-indicator').at(1).props().style.display).toBe('block');
+    })
+
+    it('Check if loading indicator hides when loadingBooks set to false', () => {
+        mockProps.loadingSearchBooks = false;
+        const wrapper = mount(
+            <MemoryRouter initialEntries={['/']}>
+                <Search {...mockProps} />
+            </MemoryRouter>
+        );
+
+        expect(wrapper.find('.loader-search-indicator').at(1).props().style.display).toBe('none');
     })
 })

@@ -14,21 +14,11 @@ describe('<BookShelfChanger />', () => {
                 key: 'read'
             }
         }
-    }
-
-    it('Change value of showList state when button is clicked', () => {
-        const wrapper = shallow(<BookShelfChanger {...mockProps} />);
-        const showListOldValue = wrapper.state().showList;
-
-        wrapper.find('.book-shelf-changer').props().onClick();
-        const showListNewValue = wrapper.state().showList;
-
-        expect(showListOldValue).not.toBe(showListNewValue);
-    })
+    }  
 
     it('Calls moveBook function when list item is clicked', () => {
         const wrapper = shallow(<BookShelfChanger {...mockProps} />);
-        wrapper.find('li[data-key="read"]').simulate('click', mockedEvent);
+        wrapper.find('#read').simulate('click', mockedEvent);
         expect(mockProps.moveBook).toHaveBeenCalled();
     })
 
@@ -47,7 +37,7 @@ describe('<BookShelfChanger />', () => {
             items
         })
 
-        wrapper.find('li[data-key="currentlyReading"]').simulate('click', mockedEvent);
+        wrapper.find('#currentlyReading').simulate('click', mockedEvent);
         expect(mockProps.moveBook).toHaveBeenCalledWith('read');
     })
 })

@@ -5,10 +5,6 @@ import BookWithoutCoverImage from '../images/book_without_cover.png';
 import { Card, CardBody, CardTitle, CardImg, CardSubtitle } from 'reactstrap';
 
 class Book extends PureComponent {
-    state = {
-        movingBook: false
-    }
-
     /**
      * @description Function responsible for return string with book's published year. 
      * Sometimes the book doesn't have the published year, then this case is considered in this function too.
@@ -29,10 +25,6 @@ class Book extends PureComponent {
     moveBook = (shelf) => {
         this.setState({ movingBook: true })
         this.props.moveBook(this.props.book, shelf);
-
-        setTimeout(() => {
-            this.setState({ movingBook: false })
-        }, 2000);
     }
 
     onDragStart = (ev) => {
