@@ -64,7 +64,7 @@ Some situations the system need notify the user that something heavy is happenin
 
 The complete resulting will be......
 
-![](demo.gif)
+![](final_demo.gif)
 
 ### License
 MIT
