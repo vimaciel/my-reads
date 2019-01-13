@@ -3,7 +3,7 @@
 
 by [Vinicius Furusho Maciel](https://www.linkedin.com/in/vimaciel)
 
-If you use My Read you can organize your books on shelves. These shelves are divided into three main categories: Currently Reading, Want to Read and Read. You are free to move your books into these shelves' categories listed previously. Also, you can do a research to find more books if you want. 
+If you use *My Reads* you can organize your books on shelves. These shelves are divided into three main categories: Currently Reading, Want to Read and Read. You are free to move your books into these shelves' categories listed previously. Also, you can do a research to find more books if you want. 
 
 My Read is a required project to complete the course [React Nanodegree](https://br.udacity.com/course/react-nanodegree--nd019) by Udacity. My Read was developed based on [reactnd-project-myreads-starter](https://github.com/udacity/reactnd-project-myreads-starter) repository provided by Udacity.
 
